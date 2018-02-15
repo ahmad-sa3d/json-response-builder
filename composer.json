@@ -1,0 +1,34 @@
+{
+    "name": "saad/json-response",
+    "description": "this package semplifies sending API json response by using a standard and unique response structure",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ahmed Saad",
+            "email": "a7mad.sa3d.2014@gmail.com"
+        }
+    ],
+
+    "require": {
+        "php": ">=5.6.4",
+        "illuminate/http": "~5.0"
+    },
+
+    "require-dev": {
+        "phpunit/phpunit": "~5.0",
+        "orchestra/testbench": "~3.0"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "Saad\\JsonResponseBuilder\\": "src/"
+        }
+    },
+
+    "autoload-dev": {
+        "psr-4": {
+            "Test\\Unit\\": "tests/unit"
+        }
+    }
+}
