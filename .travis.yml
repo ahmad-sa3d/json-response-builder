@@ -1,0 +1,23 @@
+env:
+  global:
+    - CC_TEST_REPORTER_ID=df827f66c25d4fc2115bf936906bf0c84c37051f0a812d54390daf21b6c6b07a
+
+notifications:
+  slack: a7madsa3d:NV7CXXB4FMHOLUIuBQ81RbQe
+
+language: php
+
+php:
+  - 7.1.9
+
+before_script:
+  - composer self-update
+  - composer require codeclimate/php-test-reporter --dev
+  - composer install
+
+script:
+  - vendor/bin/phpunit --coverage-text --coverage-clover build/logs/clover.xml
+
+after_script:
+  - CODECLIMATE_REPO_TOKEN=df827f66c25d4fc2115bf936906bf0c84c37051f0a812d54390daf21b6c6b07a vendor/bin/test-reporter --stdout > codeclimate.json
+  - "sh -c 'curl -X POST -d @codeclimate.json -H \"Content-Type: application/json\" -H \"User-Agent: Code Climate PHP Test reporter\" https://codeclimate.com/test_reports ;'"
