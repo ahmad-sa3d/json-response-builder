@@ -1,5 +1,5 @@
 {
-    "name": "saad/json-response",
+    "name": "saad/json-response-builder",
     "description": "this package semplifies sending API json response by using a standard and unique response structure",
     "type": "library",
     "license": "MIT",
