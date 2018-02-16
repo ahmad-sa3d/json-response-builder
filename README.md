@@ -4,10 +4,10 @@
 </p>
 
 <p align="center">
-<a href="https://travis-ci.org/ahmad-sa3d/tajawal-backend"><img src="https://travis-ci.org/ahmad-sa3d/json-response-builder.svg?branch=master" alt="Build Status"></a>
-<a href="https://codeclimate.com/github/ahmad-sa3d/json-re[]()sponse-builder/maintainability"><img src="https://api.codeclimate.com/v1/badges/84d709814a320dc85f0a/maintainability" /></a>
+<a href="https://travis-ci.org/ahmad-sa3d/json-response-builder"><img src="https://travis-ci.org/ahmad-sa3d/json-response-builder.svg?branch=master" alt="Build Status"></a>
+<a href="https://codeclimate.com/github/ahmad-sa3d/json-response-builder/maintainability"><img src="https://api.codeclimate.com/v1/badges/84d709814a320dc85f0a/maintainability" /></a>
 <a href="https://codeclimate.com/github/ahmad-sa3d/json-response-builder/test_coverage"><img src="https://api.codeclimate.com/v1/badges/84d709814a320dc85f0a/test_coverage" /></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
+<a href="https://packagist.org/packages/saad/json-response-builder"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
 
