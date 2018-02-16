@@ -25,7 +25,7 @@
 		
 	``` php
 		
-		$builder = new Saad\Response\JsonResponseBuilder();
+		$builder = new Saad\JsonResponseBuilder\JsonResponseBuilder();
 		
 		$builder->mergeData([
 			['name' => 'Ahmed Saad'],
