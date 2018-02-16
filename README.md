@@ -4,13 +4,10 @@
 </p>
 
 <p align="center">
-	<a href="https://travis-ci.org/ahmad-sa3d/tajawal-backend"><img src="https://travis-ci.org/ahmad-sa3d/json-response-builder.svg?branch=master" alt="Build Status"></a>
-	
-	<a href="https://codeclimate.com/github/ahmad-sa3d/json-re[]()sponse-builder/maintainability"><img src="https://api.codeclimate.com/v1/badges/84d709814a320dc85f0a/maintainability" /></a>
-	
-	<a href="https://codeclimate.com/github/ahmad-sa3d/json-response-builder/test_coverage"><img src="https://api.codeclimate.com/v1/badges/84d709814a320dc85f0a/test_coverage" /></a>
-	
-	<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
+<a href="https://travis-ci.org/ahmad-sa3d/tajawal-backend"><img src="https://travis-ci.org/ahmad-sa3d/json-response-builder.svg?branch=master" alt="Build Status"></a>
+<a href="https://codeclimate.com/github/ahmad-sa3d/json-re[]()sponse-builder/maintainability"><img src="https://api.codeclimate.com/v1/badges/84d709814a320dc85f0a/maintainability" /></a>
+<a href="https://codeclimate.com/github/ahmad-sa3d/json-response-builder/test_coverage"><img src="https://api.codeclimate.com/v1/badges/84d709814a320dc85f0a/test_coverage" /></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
 
@@ -78,16 +75,16 @@
 ### `addData($key, $value)`
 > 	Appends to data new member with the given key and value
 > 
-> ```php
+> ``` php
 > 	$builder->addData('doctors', ['ahmed', 'mohamed', 'saad']);
 >	$builder->addData('patients', ['patient1', 'patient3', 'patient3']);
 >
 > 	// Output data will be 
 > 
-	"data": {
-		"doctors": ["ahmed", "mohamed", "saad"],
-		"patients" ["patient1", "patient4", "patient3"]
-	},
+>	"data": {
+>		"doctors": ["ahmed", "mohamed", "saad"],
+>		"patients" ["patient1", "patient4", "patient3"]
+>	},
 > 
 > 
 > ```
@@ -98,25 +95,23 @@
 > 
 > this method also if the given array has key called 'meta' it will remove that key and add it to response meta
 > 
-> ```php
+> ``` php
 > 	$builder->mergeData(['ahmed', 'mohamed', 'meta' => ['key' => 'Iam Meta']]);
 >
 > 	// Output will be 
 > 
 > 	{
-	 	"success": true,
-	 	"meta": {
-	 		"key": "Iam Meta"
-	 	},	
-		"data": [
-			"ahmed",
-			"mohamed"
-		],
-		"message": "Successfully Retrieved"
-	}
-		
-> 
-> 
+>	 	"success": true,
+>	 	"meta": {
+>	 		"key": "Iam Meta"
+>	 	},	
+>		"data": [
+>			"ahmed",
+>			"mohamed"
+>		],
+>		"message": "Successfully Retrieved"
+>	}
+>		 
 > ```
 
 ### `addMeta($key, $value)`
@@ -135,24 +130,25 @@
 
 
 ### `error($message = null, $error_code = null)`
+
 > 	set response success status to __`false`__ and set nessage and error code
 > 
-> ```php
+> 	``` php
 > 	$builder->error('Fails!', 2345);
 >
 > 	// Output will be 
 > 
 > 	{
-	 	"success": false,
-	 	"meta": [],	
-		"data": [],
-		'error': {
-			"message": "Fails!",
-			"code": 2345
-		}
-		"message": "Fails!"
-	}
-		
+>	 	"success": false,
+>	 	"meta": [],	
+>		"data": [],
+>		'error': {
+>			"message": "Fails!",
+>			"code": 2345
+>		}
+>		"message": "Fails!"
+>	}
+>		
 >
 
 ### `setStatusCode(301)`
