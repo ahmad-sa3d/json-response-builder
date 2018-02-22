@@ -171,7 +171,7 @@
 >		'error': {
 >			"message": "Fails!",
 >			"code": 2345,
-> 			"validation" => "validation value"
+> 			"validation": "validation value"
 >		}
 >		"message": "Fails!"
 >	}
