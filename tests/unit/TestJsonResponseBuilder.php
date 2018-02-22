@@ -156,4 +156,40 @@ class TestJsonResponseBuilder extends TestCase
 		$this->expectException('InvalidArgumentException');
 		$this->builder->getResponse(5064);
 	}
+
+	/** @test */
+	public function it_can_set_response_message_explicity()
+	{
+		$this->builder->error('error message')
+			->setMessage('iam a message');
+
+		$this->assertEquals('iam a message', $this->getMessage());
+	}
+
+	/** @test */
+	public function it_can_add_keys_to_error_array()
+	{
+		$this->builder->error('error message')
+			->addError('key', 'val');
+
+		$this->assertArrayHasKey('key', $this->getError());
+		$this->assertEquals('val', $this->getError()['key']);
+	}
+
+	/** @test */
+	public function it_through_exception_when_trying_to_add_error_before_calling_error_method()
+	{
+		$this->expectException('BadMethodCallException');
+		$this->builder->addError('key', 'val');
+	}
+
+	/** @test */
+	public function it_removes_error_array_if_status_become_success_after_error()
+	{
+		$this->builder->error('My Error!', 400)
+				->success('My Success')
+				->getResponse();
+
+		$this->assertArrayNotHasKey('error', $this->getResponseArray());
+	}
 }
