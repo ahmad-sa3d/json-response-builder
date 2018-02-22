@@ -129,6 +129,10 @@
 > 	set response success status to __`true`__, and set response message if supplied.
 
 
+### `setMessage($response_message = null)`
+> 	set response message if supplied.
+
+
 ### `error($message = null, $error_code = null)`
 
 > 	set response success status to __`false`__ and set nessage and error code
@@ -148,8 +152,30 @@
 >		}
 >		"message": "Fails!"
 >	}
->		
+
+
+### `addError($key, mixed $value)`
+
+> 	Add key to error array
+> 
+> 	``` php
+> 	$builder->error('Fails!', 2345)
+>		->addError('validation', 'validation value');
 >
+> 	// Output will be 
+> 
+> 	{
+>	 	"success": false,
+>	 	"meta": [],	
+>		"data": [],
+>		'error': {
+>			"message": "Fails!",
+>			"code": 2345,
+> 			"validation" => "validation value"
+>		}
+>		"message": "Fails!"
+>	}
+
 
 ### `setStatusCode(301)`
 > 	set response status code.
@@ -160,4 +186,4 @@
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).README.md
