@@ -60,7 +60,7 @@ class JsonResponseBuilder implements JsonResponseBuilderContract{
 	 * Add Meta
 	 * @param string $key   key
 	 * @param mixed $value value
-	 * @return  instance
+	 * @return JsonResponseBuilder Current Instance
 	 */
 	public function addMeta($key, $value) {
 		$this->response['meta'][$key] = $value;
@@ -70,7 +70,7 @@ class JsonResponseBuilder implements JsonResponseBuilderContract{
 	/**
 	 * Merge Meta
 	 * @param array $meta   meta array
-	 * @return  instance
+	 * @return JsonResponseBuilder Current Instance
 	 */
 	public function mergeMeta(array $meta) {
 		$this->response['meta'] = array_merge($this->response['meta'], $meta);
@@ -81,7 +81,7 @@ class JsonResponseBuilder implements JsonResponseBuilderContract{
 	 * Add Data
 	 * @param string $key   key
 	 * @param mixed $value value
-	 * @return  instance
+	 * @return JsonResponseBuilder Current Instance
 	 */
 	public function addData($key, $value) {
 		$this->response['data'][$key] = $value;
@@ -91,7 +91,7 @@ class JsonResponseBuilder implements JsonResponseBuilderContract{
 	/**
 	 * Merge Data
 	 * @param array $data   data array
-	 * @return  instance
+	 * @return JsonResponseBuilder Current Instance
 	 */
 	public function mergeData(array $data) {
 		if (isset($data['meta'])) {
@@ -108,7 +108,7 @@ class JsonResponseBuilder implements JsonResponseBuilderContract{
 	 * Add Header
 	 * @param string $key   key
 	 * @param mixed $value value
-	 * @return  instance
+	 * @return JsonResponseBuilder Current Instance
 	 */
 	public function addHeader($key, $value) {
 		$this->headers[$key] = $value;
@@ -118,10 +118,21 @@ class JsonResponseBuilder implements JsonResponseBuilderContract{
 	/**
 	 * Set Response Status To success
 	 * @param integer $status_code  Status Code
+	 * @return JsonResponseBuilder Current Instance
 	 */
 	public function success($message = null) {
-		$this->response['success'] = true;
+		$this->setSuccess(true);
+		$this->setMessage($message);
 
+		return $this;
+	}
+
+	/**
+	 * Set Response Message
+	 * @param string $message  Message
+	 * @return JsonResponseBuilder Current Instance
+	 */
+	public function setMessage($message = null) {
 		if ($message) {
 			$this->response['message'] = (string) $message;
 		}
@@ -129,21 +140,23 @@ class JsonResponseBuilder implements JsonResponseBuilderContract{
 		return $this;
 	}
 
+
 	/**
 	 * Set Response Status To Error
 	 * @param integer $status_code  Status Code
+	 * @return JsonResponseBuilder Current Instance
 	 */
 	public function error($message = null, $error_code = null) {
-		$this->response['success'] = false;
+		$this->setSuccess(false);
 
-		$this->error = [
-				'message' => $message ?: '',
-				'code' => $this->statusCode,
-			];
-
-		if ($message) {
-			$this->response['message'] = (string) $message;
+		if (!$this->error) {
+			$this->error = [];
 		}
+
+		$this->error['message'] = $message ?: '';
+		$this->error['code'] = $this->statusCode;
+
+		$this->setMessage($message);
 
 		if ($error_code) {
 			$this->error['code'] = $error_code;
@@ -153,11 +166,29 @@ class JsonResponseBuilder implements JsonResponseBuilderContract{
 	}
 
 	/**
+	 * Add Error To Errors Array
+	 * @param string $key   Key
+	 * @param mixed $value Value
+	 * @return JsonResponseBuilder Current Instance
+	 */
+	public function addError($key, $value)
+	{
+		if (!$this->error) {
+			throw new \BadMethodCallException(__METHOD__ . ' you have to call error() method first before start adding errors.');
+		}
+
+		$this->error[$key] = $value;
+		return $this;
+	}
+
+	/**
 	 * Set Response Status Code
 	 * @param integer $status_code  Status Code
+	 * @return JsonResponseBuilder Current Instance
 	 */
 	public function setStatusCode($status_code) {
 		$this->statusCode = (int) $status_code;
+		return $this;
 	}
 
 	/**
@@ -174,5 +205,21 @@ class JsonResponseBuilder implements JsonResponseBuilderContract{
 		}
 
 		return new JsonResponse($this->response, $this->statusCode, $this->headers);
+	}
+
+	/**
+	 * Set Success
+	 * @param bool $value
+	 * @return JsonResponseBuilder Current Instance
+	 */
+	protected function setSuccess(bool $value)
+	{
+		$this->response['success'] = $value;
+
+		if ($value) {
+			$this->error = null;
+		}
+
+		return $this;
 	}
 }

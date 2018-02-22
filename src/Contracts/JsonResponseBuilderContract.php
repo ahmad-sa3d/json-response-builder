@@ -52,10 +52,24 @@ interface JsonResponseBuilderContract{
 	public function success($message);
 
 	/**
+	 * Set Response Status To success
+	 * @param integer $status_code  Status Code
+	 */
+	public function setMessage($message);
+
+
+	/**
 	 * Set Response Status To Error
 	 * @param integer $status_code  Status Code
 	 */
 	public function error($message, $error_code);
+
+	/**
+	 * Add To error Array
+	 * @param string $key   key
+	 * @param mixed $value value
+	 */
+	public function addError($key, $value);
 
 	/**
 	 * Set Response Status Code
