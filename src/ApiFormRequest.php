@@ -18,6 +18,9 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Saad\JsonResponseBuilder\JsonResponseBuilder;
 
+/**
+ * @codeCoverageIgnore
+ */
 class ApiFormRequest extends FormRequest
 {
 	/**
@@ -45,7 +48,7 @@ class ApiFormRequest extends FormRequest
 	public function response(array $errors)
 	{
 		if ($this->expectsJson()) {
-            return new JsonResponseBuilder()
+            return (new JsonResponseBuilder())
     			->error('Validation Errors', $this->responseCode())
     			->addError('validation', [
 	            	'first' => reset($errors)[0],
