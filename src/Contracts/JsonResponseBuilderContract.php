@@ -6,7 +6,7 @@
  * @author  Ahmed Saad <a7mad.sa3d.2014@gmail.com>
  * @package Api Json Response
  * @license MIT
- * @version 1.0.0 First Version
+ * @version 1.2.0 First Version
  */
 namespace Saad\JsonResponseBuilder\Contracts;
 
