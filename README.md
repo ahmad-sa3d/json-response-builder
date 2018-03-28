@@ -15,6 +15,16 @@
 ``` bash
 	composer require saad/json-response-builder
 ```
+
+### Change Log
+> `V 1.3`
+
+Add Strict Mode and enabled by default:
+in strict mode if data or meta are empty it will set it's value to `null` instead of `[]`
+
+to turn of strickt mode, on constructor pass `false` to disable strickt mode so that it will return data, and meta as empty array if they are empty
+
+you can set mode on instance by the method `strictMode(bool)`
 	
 ### Usage
 
@@ -144,8 +154,8 @@
 > 
 > 	{
 >	 	"success": false,
->	 	"meta": [],	
->		"data": [],
+>	 	"meta": null,	
+>		"data": null,
 >		'error': {
 >			"message": "Fails!",
 >			"code": 2345
@@ -166,8 +176,8 @@
 > 
 > 	{
 >	 	"success": false,
->	 	"meta": [],	
->		"data": [],
+>	 	"meta": null,	
+>		"data": null,
 >		'error': {
 >			"message": "Fails!",
 >			"code": 2345,
@@ -180,6 +190,36 @@
 ### `setStatusCode(301)`
 > 	set response status code.
 
+### `strictMode(bool)`
+
+> default value `true`
+> 
+> since `V1.3`
+> 
+> enable or disable strict mode.
+>
+> 	``` php
+> 	$builder->getResponse();
+>
+> 	// Strict Mode Enabled, Output will be 
+> 
+> 	{
+>	 	"success": false,
+>	 	"meta": null,	
+>		"data": null,
+>		"message": ""
+>	}
+>
+>	$builder->strictMode(false)->getResponse();
+>
+> 	// Strict Mode Disabled, Output will be 
+> 
+> 	{
+>	 	"success": false,
+>	 	"meta":[],	
+>		"data":[],
+>		"message": ""
+>	}
 
 ### `getResponse($status_code = null)`
 > 	set response status code if supplied, and return Response Object
