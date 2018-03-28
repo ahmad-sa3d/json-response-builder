@@ -17,6 +17,45 @@
 ```
 
 ### Change Log
+> `V 1.3.1`
+
+add feature to merge meta when adding data
+
+`addData(str $key, mix $val, bool $merge_meta)`
+
+``` php
+		
+	$builder = new Saad\JsonResponseBuilder\JsonResponseBuilder();
+	
+	$builder->addData('users', [
+		['name' => 'Ahmed Saad'],
+		'meta' => [
+			'name' => 'iam meta',
+		]
+	], true); // Note the third argument
+	
+	
+	return $builder->getResponse();
+	
+	// Output
+	
+	{
+        "success": true,
+	
+        "meta" : {
+            'name' => 'iam meta',
+        },
+	
+        "data": [
+            'users': [
+            		{"name": "Ahmed Saad"}
+            ],
+        ],
+	
+        "message": "Successfully Retrieved"
+    }
+```    
+
 > `V 1.3`
 
 Add Strict Mode and enabled by default:

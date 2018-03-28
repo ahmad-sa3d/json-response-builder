@@ -29,8 +29,9 @@ interface JsonResponseBuilderContract{
 	 * Add Data
 	 * @param string $key   key
 	 * @param mixed $value value
+	 * @param bool $parse_meta if to parse meta
 	 */
-	public function addData($key, $value);
+	public function addData($key, $value, bool $parse_meta);
 
 	/**
 	 * Merge Data

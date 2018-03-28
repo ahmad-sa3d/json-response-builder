@@ -102,9 +102,14 @@ class JsonResponseBuilder implements JsonResponseBuilderContract{
 	 * Add Data
 	 * @param string $key   key
 	 * @param mixed $value value
+	 * @param bool $parse_meta value
 	 * @return JsonResponseBuilder Current Instance
 	 */
-	public function addData($key, $value) {
+	public function addData($key, $value, bool $parse_meta = false) {
+		if ($parse_meta) {
+			$this->parseMeta($value);
+		}
+
 		$this->response['data'][$key] = $value;
 		return $this;
 	}
@@ -115,12 +120,7 @@ class JsonResponseBuilder implements JsonResponseBuilderContract{
 	 * @return JsonResponseBuilder Current Instance
 	 */
 	public function mergeData(array $data) {
-		if (isset($data['meta'])) {
-			$meta = $data['meta'];
-			unset($data['meta']);
-			$this->mergeMeta($meta);
-		}
-		
+		$this->parseMeta($data);		
 		$this->response['data'] = array_merge($this->response['data'], $data);
 		return $this;
 	}
@@ -252,5 +252,19 @@ class JsonResponseBuilder implements JsonResponseBuilderContract{
 		}
 
 		return $this;
+	}
+
+	/**
+	 * Parse Meta
+	 * @param  [type] &$data [description]
+	 * @return [type]        [description]
+	 */
+	protected function parseMeta(&$data)
+	{
+		if (isset($data['meta'])) {
+			$meta = $data['meta'];
+			unset($data['meta']);
+			$this->mergeMeta($meta);
+		}
 	}
 }

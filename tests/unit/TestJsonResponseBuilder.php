@@ -227,4 +227,19 @@ class TestJsonResponseBuilder extends TestCase
 		$this->assertEquals([], $this->getMeta());
 		$this->assertEquals([], $this->getData());
 	}
+
+	/** @test */
+	public function it_can_add_data_contains_meta_and_merge_meta_correctly()
+	{
+		$this->builder->addData('key', [
+			'name' => 'Another Ahmed Saad',
+			'age' => 29,
+			'meta' => [
+				'name' => 'meta name',
+			]
+		], true);
+
+		$this->assertArrayHasKey('key', $this->getData());
+		$this->assertArrayHasKey('name', $this->getMeta());
+	}
 }
