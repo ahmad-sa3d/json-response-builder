@@ -41,9 +41,17 @@ class JsonResponseBuilder implements JsonResponseBuilderContract{
 	protected $error;
 
 	/**
+	 * Check if strick mode
+	 *
+	 * if ok, empty meta and data will be null
+	 * @var bool
+	 */
+	protected $strict_mode;
+
+	/**
 	 * Constructor
 	 */
-	public function __construct()
+	public function __construct(bool $strict_mode = true)
 	{
 		$this->response = [
 			'meta' => [],
@@ -54,6 +62,19 @@ class JsonResponseBuilder implements JsonResponseBuilderContract{
 
 		$this->statusCode = 200;
 		$this->headers = [];
+
+		$this->strictMode($strict_mode);
+	}
+
+	/**
+	 * Set Strict Mode
+	 * 
+	 * @param bool $strict_mode   key
+	 * @return JsonResponseBuilder Current Instance
+	 */
+	public function strictMode(bool $strict_mode = true) {
+		$this->strict_mode = $strict_mode;
+		return $this;
 	}
 
 	/**
@@ -202,6 +223,16 @@ class JsonResponseBuilder implements JsonResponseBuilderContract{
 
 		if ($this->error) {
 			$this->response['error'] = $this->error;
+		}
+
+		if ($this->strict_mode) {
+			if (empty($this->response['meta'])) {
+				$this->response['meta'] = null;
+			}
+
+			if (empty($this->response['data'])) {
+				$this->response['data'] = null;
+			}
 		}
 
 		return new JsonResponse($this->response, $this->statusCode, $this->headers);

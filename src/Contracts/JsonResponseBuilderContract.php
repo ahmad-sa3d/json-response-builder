@@ -78,6 +78,13 @@ interface JsonResponseBuilderContract{
 	public function setStatusCode($status_code);
 
 	/**
+	 * Strict Mode
+	 * @param string $key   key
+	 * @param mixed $value value
+	 */
+	public function strictMode(bool $mode);
+
+	/**
 	 * Set Response
 	 * @param integer $status_code  Status Code
 	 */

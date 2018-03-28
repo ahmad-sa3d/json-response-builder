@@ -192,4 +192,39 @@ class TestJsonResponseBuilder extends TestCase
 
 		$this->assertArrayNotHasKey('error', $this->getResponseArray());
 	}
+
+	/** @test */
+	public function it_can_enable_strict_mode()
+	{
+		$this->builder->strictMode(true)
+				->getResponse();
+
+		$this->assertTrue($this->getStrictMode());
+	}
+
+	/** @test */
+	public function it_can_disable_strict_mode()
+	{
+		$this->builder->strictMode(false)
+				->getResponse();
+
+		$this->assertFalse($this->getStrictMode());
+	}
+
+	/** @test */
+	public function it_sets_strict_mode_by_default()
+	{
+		$this->builder->getResponse();
+
+		$this->assertTrue($this->getStrictMode());
+	}
+
+	/** @test */
+	public function it_return_meta_and_data_if_are_empty_as_empty_array_on_strict_mode_off()
+	{
+		$this->builder->strictMode(false)->getResponse();
+
+		$this->assertEquals([], $this->getMeta());
+		$this->assertEquals([], $this->getData());
+	}
 }

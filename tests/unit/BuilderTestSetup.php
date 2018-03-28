@@ -85,6 +85,14 @@ trait BuilderTestSetup {
 	}
 
 	/**
+	 * Get Builder protected strict_mode
+	 * @return bool strict_mode
+	 */
+	protected function getStrictMode() {
+		return PHPUnit_Framework_Assert::readAttribute($this->builder, 'strict_mode');
+	}
+
+	/**
 	 * Get Builder protected errors
 	 * @return array errors array
 	 */
